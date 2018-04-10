@@ -1,0 +1,47 @@
+extends layout
+block link
+  -var wybor='Zarządzaj filmami';
+  -var n=0;
+block content
+ br
+ table(class='table-style style-colorheader')
+  thead
+   tr
+    th Termin
+    th Film
+    th Zapełnienie
+    th Usuwanie
+   each item in zarzadzajf
+    tr
+     td #{item.dataFormatFilm}
+     td #{item.nazwaFilm}
+     td
+      center
+       a(href='/rezerwacja/#{item.idFilm}', title=wartosc)
+        font(style="color:green;") Rezerwacje
+     td
+      form(action="usun-film" name='fdfd' method="POST")
+       input(type="hidden" name="usun" value="#{item.idFilm}")
+       a(href="#" onclick="document.forms[#{n}].submit();return false;")
+        font(color='red') Usuń
+      - n++;
+ br
+ h2 Dodaj nowy film:
+ form(action="dodaj-film" name='fdfd' method="POST")
+  table
+   tr
+    td Nazwa filmu: 
+    td
+     input(type="text" name="nazwafilm" value="" required)
+   tr
+    td Termin: 
+    td
+     input(type="date" name="termin" min="2018-02-01" data-date="" data-date-format="yyyy-dd-mm" required)
+   tr
+    td Godzina: 
+    td
+     input(type="time" name="godzina" required)
+   tr
+    td
+    td
+     input(type="submit" value="Dodaj film!")

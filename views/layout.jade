@@ -1,0 +1,27 @@
+doctype html
+html
+  block link
+   -var wybor='';
+  -var menu={'Strona główna': '/', 'Sprawdź rezerwacje': '/sprawdz-rezerwacje' , 'Zarządzaj filmami': '/zarzadzaj-filmy', 'Zarządzaj rezerwacjami': '/zarzadzaj-rezerwacje'};
+  - var maxKolumna=8;
+  - var maxWiersz=5;
+  head
+    title #{title} - System rezerwacji
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='shortcut icon', href='/images/favicon.ico', type='image/x-icon') 
+  body(class='site')
+   #menu
+    ul
+        each url, wartosc in menu
+          li
+            if wybor===wartosc
+              a.active(href=url, title=wartosc)=wartosc
+            else
+              a(href=url, title=wartosc)=wartosc
+   #main
+    #maincontent
+     center
+      block content
+     br
+    footer#foot
+     center &copy;2018 Adrian Bełciak

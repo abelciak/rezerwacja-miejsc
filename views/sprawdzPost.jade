@@ -1,0 +1,42 @@
+extends layout
+block link
+  -var wybor='Sprawdź rezerwacje';
+block content
+ h2 Podaj numer rezerwacji:
+ form(method="POST" name='fd' action="/sprawdz-rezerwacje")
+  input(type="text" name="id" maxlength="6" required="required")
+  input(type="submit" value="Sprawdź!")
+ br
+ each item in sprawdz
+  table
+   tr
+    td Numer rezerwacji:
+    td #{item.idRezerwacja}
+   tr
+    td Film:
+    td #{item.nazwaFilm}
+   tr
+    td Data seansu:
+    td #{item.dataseansFilm}
+   tr
+    td Rząd:
+    td #{item.rzadRezerwacja}
+   tr
+    td Miejsce:
+    td #{item.miejsceRezerwacja}
+   tr
+    td Imię:
+    td #{item.imieRezerwacja}
+   tr
+    td Nazwisko:
+    td #{item.nazwiskoRezerwacja}
+   tr
+    td Data rezerwacji:
+    td #{item.dzienRezerwacja}
+   tr
+    td
+    td
+     form(action="anuluj-rezerwacje" name='fdfd' method="POST")
+      input(type="hidden" name="usun" value="#{item.idRezerwacja}")
+      a(href="#" onclick="document.forms[1].submit();return false;")
+       font(color='red') Anuluj rezerwacje

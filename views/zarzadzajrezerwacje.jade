@@ -1,0 +1,32 @@
+extends layout
+block link
+  -var wybor='Zarządzaj rezerwacjami';
+  -var n=0;
+block content
+ br
+ table(class='table-style style-colorheader')
+  thead
+   tr
+    th Numer rezerwacji
+    th Film
+    th Data seansu
+    th Miejsce
+    th Imię
+    th Nazwisko
+    th Data rezerwacji
+    th Anulowanie
+  each item in zarzadzaj
+   tr
+    td #{item.idRezerwacja}
+    td #{item.nazwaFilm}
+    td #{item.dataseansFilm}
+    td Miejsce: #{item.miejsceRezerwacja}<br>Rząd: #{item.rzadRezerwacja}
+    td #{item.imieRezerwacja}
+    td #{item.nazwiskoRezerwacja}
+    td #{item.dzienRezerwacja}
+    td
+     form(action="usun-rezerwacje" name='fdfd' method="POST")
+      input(type="hidden" name="usun" value="#{item.idRezerwacja}")
+      a(href="#" onclick="document.forms[#{n}].submit();return false;")
+       font(color='red') Anuluj
+   - n++;

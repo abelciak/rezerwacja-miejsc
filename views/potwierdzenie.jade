@@ -1,0 +1,58 @@
+extends layout
+block link
+block content
+ - var tablica={};
+ - var n=0;
+ - var bol=false;
+ each item2 in rezerwacja
+  - tablica[n]=item2.miejsceRezerwacja;
+  - n++;
+ - function addCommas(val){
+  - bol=false;
+  - for(var l=0; l<n; l++)
+   - if (tablica[l]===val)
+    - bol=true
+  - return bol
+ - }
+ each item in filmy
+  |Film: #{item.nazwaFilm}, emitowany w dniu #{item.dataFormatFilm}
+ br
+ h1
+  each item3 in szczegoly
+   font(color='green') Gratulujemy #{item3.imieRezerwacja}! Twoja rezerwacja została potwierdzona!
+   br
+   font(color='darkblue') Numer Twojej rezerwacji: #{item3.idRezerwacja}
+ br
+ table(class='table-style style-colorheader')
+  tr
+   thead 
+    td
+    td(colspan='#{maxKolumna}')
+     center
+      img(style='max-width: 540px' src='/images/ekran.png')
+  - for(var i=1; i<=maxWiersz; i++)
+   thead
+    tr
+     th
+      center #{i}
+     - for(var j=1; j<=maxKolumna; j++)
+      td
+       - var miejsce=i+''+j;
+       - miejsce=parseInt(miejsce);
+        if addCommas(miejsce)===true
+         a(href='#')
+          img(src='/images/zajete.png')
+        else
+         each item in filmy
+          a(href='/rezerwuj/#{item.idFilm}/#{i}/#{j}')
+           img(src='/images/wolne.png')
+  thead
+   tr
+    th
+     center
+      |Rząd ↑
+      br
+      |Miejsce →
+    - for(var x=1; x<=maxKolumna; x++)
+      th
+       center #{x}

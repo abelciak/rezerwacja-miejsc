@@ -1,0 +1,27 @@
+extends layout
+block link
+  -var wybor='Strona główna';
+
+block content
+  h2 Witaj w systemie zarządzania rezerwacjami miejsc w sali kinowej.
+  p 
+  br
+  br
+  table(class='table-style style-colorheader')
+   thead
+    tr 
+     th(colspan='3')
+      center Najbliższe filmy
+   thead
+    tr
+     th Termin
+     th Film
+     th Rezerwacja
+    each item in filmy
+     tr
+      td #{item.dataFormatFilm}
+      td #{item.nazwaFilm}
+      td
+       center
+        a(href='/rezerwacja/#{item.idFilm}', title=wartosc)
+         font(style="color:green;") Rezerwuj
